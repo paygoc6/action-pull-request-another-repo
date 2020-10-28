@@ -26,3 +26,4 @@ jobs:
         destination_branch: 'branch-name'
         user_email: 'user-name@paygo.com.br'
         user_name: 'user-name'
+
