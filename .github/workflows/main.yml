@@ -1,0 +1,28 @@
+name: Pull Request another repository
+
+on: 
+  push:
+    branches:
+      - '*'
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Generate test directory and file [optional]
+      run: sh generate-test-file.sh
+
+    - name: Create pull request
+      uses: paygoc6/pull-request-another-repo-action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_folder: 'source-folder'
+        destination_repo: 'paygoc6/repository-name'
+        destination_folder: 'folder-name'
+        destination_branch: 'branch-name'
+        user_email: 'user-name@paygo.com.br'
+        user_name: 'user-name'

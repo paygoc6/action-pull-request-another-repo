@@ -1,0 +1,34 @@
+name: 'Pull Request another repository'
+description: 'Used for pull request a copy of a folder to another repository'
+inputs:
+  source_folder:
+    description: 'Source folder from origin'
+    required: true
+  destination_repo:
+    description: 'Destination repository'
+    required: true
+  destination_folder:
+    description: 'Destination folder to push the origin folder'
+    required: false
+  user_email:
+    description: 'Email for the git commit'
+    required: true
+  user_name:
+    description: 'GitHub username for the commit'
+    required: true
+  destination_branch:
+    description: 'Branch to create to push file to. Cannot be master or main'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.source-folder }}
+    - ${{ inputs.destination-repo }}
+    - ${{ inputs.destination-folder }}
+    - ${{ inputs.user-email }}
+    - ${{ inputs.user-name }}
+    - ${{ inputs.destination-branch }}
+branding:
+  icon: 'git-commit'
+  color: 'green'
