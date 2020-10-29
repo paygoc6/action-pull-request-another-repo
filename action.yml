@@ -31,7 +31,8 @@ runs:
     - ${{ inputs.destination-folder }}
     - ${{ inputs.user-email }}
     - ${{ inputs.user-name }}
-    - ${{ inputs.destination-branch }}
+    - ${{ inputs.destination-head-branch }}
+    - ${{ inputs.destination-base-branch }}
 branding:
   icon: 'git-commit'
   color: 'green'
