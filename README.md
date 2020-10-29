@@ -21,8 +21,8 @@ This GitHub Action copies a folder from the current repository to a location in 
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
-            source_folder: 'target'
-            destination_repo: 'paygoc6/repo-name'
+            source_folder: 'source-folder'
+            destination_repo: 'paygoc6/repository-name'
             destination_folder: 'folder-name'
             destination_branch: 'branch-name'
             user_email: 'user-name@paygo.com.br'
