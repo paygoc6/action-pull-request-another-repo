@@ -22,7 +22,7 @@ jobs:
         source_folder: 'source-folder'
         destination_repo: 'paygoc6/repository-name'
         destination_folder: 'folder-name'
-        destination_branch: 'branch-name'
+        destination_head_branch: 'branch-name'
         user_email: 'user-name@paygo.com.br'
         user_name: 'user-name'
 

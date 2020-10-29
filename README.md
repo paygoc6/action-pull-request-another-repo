@@ -24,7 +24,8 @@ This GitHub Action copies a folder from the current repository to a location in 
             source_folder: 'source-folder'
             destination_repo: 'paygoc6/repository-name'
             destination_folder: 'folder-name'
-            destination_branch: 'branch-name'
+            destination_base_branch: 'branch-name'
+            destination_head_branch: 'branch-name'
             user_email: 'user-name@paygo.com.br'
             user_name: 'user-name'
 
@@ -34,7 +35,8 @@ This GitHub Action copies a folder from the current repository to a location in 
 * destination_folder: [optional] The folder in the destination repository to place the file in, if not the root directory.
 * user_email: The GitHub user email associated with the API token secret.
 * user_name: The GitHub username associated with the API token secret.
-* destination_branch: The branch of the source repo to update. Can't be main or master.
+* destination_base_branch: The branch into which you want your code merged. Default is main.
+* destination_head_branch: The branch to create to push the changes. Cannot be master or main.
 
 # Behavior Notes
 The action will create any destination paths if they don't exist. It will also overwrite existing files if they already exist in the locations being copied to. It will not delete the entire destination repository.

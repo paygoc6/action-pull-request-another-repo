@@ -16,9 +16,12 @@ inputs:
   user_name:
     description: 'GitHub username for the commit'
     required: true
-  destination_branch:
-    description: 'Branch to create to push file to. Cannot be master or main'
+  destination_head_branch:
+    description: 'The branch to create to push the changes. Cannot be master or main'
     required: true
+  destination_base_branch:
+    description: 'The branch into which you want your code merged. Default is main'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
