@@ -22,6 +22,9 @@ inputs:
   destination_base_branch:
     description: 'The branch into which you want your code merged. Default is main'
     required: false
+  pull_request_reviewers:
+    description: 'Pull request reviewers users'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -33,6 +36,7 @@ runs:
     - ${{ inputs.user-name }}
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
+    - ${{ inputs.pull-request-reviewers }}
 branding:
   icon: 'git-commit'
   color: 'green'

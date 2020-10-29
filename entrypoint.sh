@@ -20,6 +20,14 @@ then
   INPUT_DESTINATION_BASE_BRANCH=main
 fi
 
+
+if [ -z "$INPUT_PULL_REQUEST_REVIEWERS" ]
+then
+  PULL_REQUEST_REVIEWERS=$INPUT_PULL_REQUEST_REVIEWERS
+else
+  PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
+fi
+
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -31,7 +39,7 @@ echo "Cloning destination git repository"
 git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
-echo "Copying contents to git repo"
+echo "Copying contents to git repo"-r $INPUT_USER_NAME
 cp -R $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 cd "$CLONE_DIR"
 
@@ -47,7 +55,7 @@ then
                -b $INPUT_DESTINATION_HEAD_BRANCH \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
-               -r $INPUT_USER_NAME
+                  $PULL_REQUEST_REVIEWERS
 else
   echo "No changes detected"
 fi
