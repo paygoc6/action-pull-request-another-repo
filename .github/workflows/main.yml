@@ -2,8 +2,7 @@ name: Pull Request another repository
 
 on: 
   push:
-    branches:
-      - '*'
+    branches-ignore: [main, master]
 
 jobs:
   pull-request:
