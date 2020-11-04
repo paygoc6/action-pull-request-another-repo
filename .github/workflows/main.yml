@@ -20,7 +20,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_folder: 'source-folder'
-        destination_repo: 'paygoc6/repository-name'
+        destination_repo: 'user-name/repository-name'
         destination_folder: 'folder-name'
         destination_head_branch: 'branch-name'
         user_email: 'user-name@paygo.com.br'

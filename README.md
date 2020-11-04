@@ -22,7 +22,7 @@ This GitHub Action copies a folder from the current repository to a location in 
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
             source_folder: 'source-folder'
-            destination_repo: 'paygoc6/repository-name'
+            destination_repo: 'user-name/repository-name'
             destination_folder: 'folder-name'
             destination_base_branch: 'branch-name'
             destination_head_branch: 'branch-name'
@@ -37,7 +37,7 @@ This GitHub Action copies a folder from the current repository to a location in 
 * user_email: The GitHub user email associated with the API token secret.
 * user_name: The GitHub username associated with the API token secret.
 * destination_base_branch: [optional] The branch into which you want your code merged. Default is `main`.
-* destination_head_branch: The branch to create to push the changes. Cannot be master or main.
+* destination_head_branch: The branch to create to push the changes. Cannot be `master` or `main`.
 * pull_request_reviewers: [optional] The pull request reviewers. It can be only one (just like 'reviewer') or many (just like 'reviewer1,reviewer2,...')
 
 ## ENV
