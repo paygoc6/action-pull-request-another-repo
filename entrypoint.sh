@@ -11,15 +11,9 @@ fi
 
 if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master"]
 then
-  echo "Destination branch cannot be 'main' nor 'master'"
+  echo "Destination head branch cannot be 'main' nor 'master'"
   return -1
 fi
-
-if [ -z "$INPUT_DESTINATION_BASE_BRANCH" ]
-then
-  INPUT_DESTINATION_BASE_BRANCH=main
-fi
-
 
 if [ -z "$INPUT_PULL_REQUEST_REVIEWERS" ]
 then

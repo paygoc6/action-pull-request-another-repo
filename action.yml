@@ -20,8 +20,9 @@ inputs:
     description: 'The branch to create to push the changes. Cannot be master or main'
     required: true
   destination_base_branch:
-    description: 'The branch into which you want your code merged. Default is main'
+    description: 'The branch into which you want your code merged.'
     required: false
+    default: "main"
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
