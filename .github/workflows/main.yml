@@ -15,13 +15,14 @@ jobs:
       run: sh generate-test-file.sh
 
     - name: Create pull request
-      uses: paygoc6/pull-request-another-repo-action@main
+      uses: paygoc6/pull-request-another-repo-action@v1.0.0
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_folder: 'source-folder'
         destination_repo: 'user-name/repository-name'
         destination_folder: 'folder-name'
+        destination_base_branch: 'branch-name'
         destination_head_branch: 'branch-name'
         user_email: 'user-name@paygo.com.br'
         user_name: 'user-name'
