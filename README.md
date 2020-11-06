@@ -17,7 +17,7 @@ This GitHub Action copies a folder from the current repository to a location in 
           run: sh generate-test-file.sh
 
         - name: Create pull request
-          uses: paygoc6/pull-request-another-repo-action@v1.0.2
+          uses: paygoc6/pull-request-another-repo-action@v1.0.1
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
