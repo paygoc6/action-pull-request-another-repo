@@ -13,9 +13,6 @@ This GitHub Action copies a folder from the current repository to a location in 
         - name: Checkout
           uses: actions/checkout@v2
 
-        - name: Generate test directory and file [optional]
-          run: sh generate-test-file.sh
-
         - name: Create pull request
           uses: paygoc6/pull-request-another-repo-action@v1.0.1
           env:
