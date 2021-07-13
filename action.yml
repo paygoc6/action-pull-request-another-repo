@@ -26,6 +26,10 @@ inputs:
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  github_server:
+    description: 'Github server'
+    required: true
+    default: "github.com"
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -38,6 +42,7 @@ runs:
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.github-server }}
 branding:
   icon: 'git-commit'
   color: 'green'
