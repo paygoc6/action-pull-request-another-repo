@@ -14,7 +14,7 @@ This GitHub Action copies a folder from the current repository to a location in 
           uses: actions/checkout@v2
 
         - name: Create pull request
-          uses: caronsale/action-pull-request-another-repo@version
+          uses: car-on-sale/action-pull-request-another-repo@version
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
