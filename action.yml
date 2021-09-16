@@ -29,6 +29,9 @@ inputs:
   recursive:
     description: 'If `true` specified`, the source_folder and its entire subtree are copied into destination_folder.'
     required: false
+  commit_msg:
+    description: 'The commit message which will be used.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -42,6 +45,7 @@ runs:
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}
     - ${{ inputs.recursive }}
+    - ${{ inputs.commit_msg }}
 branding:
   icon: 'git-commit'
   color: 'green'
