@@ -26,6 +26,9 @@ inputs:
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  recursive:
+    description: 'If `true` specified`, the source_folder and its entire subtree are copied into destination_folder.'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -38,6 +41,7 @@ runs:
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.recursive }}
 branding:
   icon: 'git-commit'
   color: 'green'

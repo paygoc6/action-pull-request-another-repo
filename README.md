@@ -14,7 +14,7 @@ This GitHub Action copies a folder from the current repository to a location in 
           uses: actions/checkout@v2
 
         - name: Create pull request
-          uses: car-on-sale/action-pull-request-another-repo@v1.0.3
+          uses: paygoc6/action-pull-request-another-repo@v1.0.1
           env:
             API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
           with:
@@ -36,6 +36,8 @@ This GitHub Action copies a folder from the current repository to a location in 
 * destination_base_branch: [optional] The branch into which you want your code merged. Default is `main`.
 * destination_head_branch: The branch to create to push the changes. Cannot be `master` or `main`.
 * pull_request_reviewers: [optional] The pull request reviewers. It can be only one (just like 'reviewer') or many (just like 'reviewer1,reviewer2,...')
+* recursive: [optional] If `true` specified, the source_folder and its entire subtree are copied into destination_folder.
+
 
 ## ENV
 * API_TOKEN_GITHUB: You must create a personal access token in you account. Follow the link:

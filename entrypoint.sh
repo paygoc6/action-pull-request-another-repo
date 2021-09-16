@@ -22,6 +22,13 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
+if [ "$INPUT_RECURSIVE" == "true" ]
+then
+  CP_OPTION="-r"
+else
+  CP_OPTION=""
+fi
+
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -34,8 +41,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-cd "$CLONE_DIR"
+cp $CP_OPTION $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
 echo "Adding git commit"
