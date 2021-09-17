@@ -22,6 +22,9 @@ inputs:
   pr_title:
     description: 'The PR title which will be defined in the PR'
     required: true
+  commit_msg:
+    description: 'The commit message which will be used.'
+    required: true
   destination_base_branch:
     description: 'The branch into which you want your code merged.'
     required: false
@@ -31,10 +34,7 @@ inputs:
     required: false
   recursive:
     description: 'If `true` specified`, the source_folder and its entire subtree are copied into destination_folder.'
-    required: false
-  commit_msg:
-    description: 'The commit message which will be used.'
-    required: false
+    required: false 
 runs:
   using: 'docker'
   image: 'Dockerfile'
