@@ -22,6 +22,8 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
+if [ -d  ]
+
 if [ "$INPUT_RECURSIVE" == "true" ]
 then
   CP_OPTION="-r"
@@ -42,10 +44,12 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 cp $CP_OPTION $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+cd "$CLONE_DIR"
 
 echo "Adding git commit"
+git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 git add .
+
 if git status | grep -q "Changes to be committed"
 then
   if [-z "$INPUT_COMMIT_MSG"]
