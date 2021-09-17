@@ -22,8 +22,6 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
-if [ -d  ]
-
 if [ "$INPUT_RECURSIVE" == "true" ]
 then
   CP_OPTION="-r"
