@@ -28,10 +28,10 @@ then
 else
   CP_OPTION=""
 fi
-
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
+export API_TOKEN_GITHUB=${API_TOKEN_GITHUB//$'\n'}
 export GITHUB_TOKEN=$API_TOKEN_GITHUB
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
