@@ -19,6 +19,9 @@ inputs:
   destination_head_branch:
     description: 'The branch to create to push the changes. Cannot be master or main'
     required: true
+  pr_title:
+    description: 'The PR title which will be defined in the PR'
+    required: true
   destination_base_branch:
     description: 'The branch into which you want your code merged.'
     required: false
@@ -46,6 +49,7 @@ runs:
     - ${{ inputs.pull-request-reviewers }}
     - ${{ inputs.recursive }}
     - ${{ inputs.commit_msg }}
+    - ${{ inputs.pr_title }}
 branding:
   icon: 'git-commit'
   color: 'green'

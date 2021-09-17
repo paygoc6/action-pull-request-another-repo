@@ -9,6 +9,12 @@ then
   return -1
 fi
 
+if [ -z $INPUT_PR_TITLE]
+then
+    echo "pr_title must be defined"
+    return -1
+fi
+
 if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master"]
 then
   echo "Destination head branch cannot be 'main' nor 'master'"
@@ -52,7 +58,7 @@ if git status | grep -q "Changes to be committed"
 then
   if [-z "$INPUT_COMMIT_MSG"]
   then
-    git commit --message "$INPUT_COMMIT_MSG"
+    git commit --message "$INPUT_COMMIT_MSG from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   else
     git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   fi
@@ -60,7 +66,7 @@ then
   echo "Pushing git commit"
   git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   echo "Creating a pull request"
-  gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
+  gh pr create -t $PR_TITLE \
                -b $INPUT_DESTINATION_HEAD_BRANCH \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
