@@ -35,13 +35,6 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
-if [ "$INPUT_RECURSIVE" == "true" ]
-then
-  CP_OPTION="-r"
-else
-  CP_OPTION=""
-fi
-
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -67,7 +60,7 @@ else
 fi
 
 echo "Copying content into destination folder"
-cp $CP_OPTION $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+mv "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 git add .
 
 if git status | grep -q "Changes to be committed"
