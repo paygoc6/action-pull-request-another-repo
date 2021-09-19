@@ -52,13 +52,22 @@ git config --global user.name "$INPUT_USER_NAME"
 echo "Cloning destination git repository"
 git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-echo "Copying contents to git repo"
+echo "Creating folder & cd into their"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $CP_OPTION $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cd "$CLONE_DIR"
 
-echo "Adding git commit"
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+
+echo "Checking if branch already exists"
+git fetch -a
+if git show-ref "$INPUT_DESTINATION_HEAD_BRANCH"; 
+then
+    git checkout "$INPUT_DESTINATINO_HEAD_BRANCH"
+else 
+    git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+fi
+
+echo "Copying content into destination folder"
+cp $CP_OPTION $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 git add .
 
 if git status | grep -q "Changes to be committed"
