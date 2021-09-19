@@ -5,6 +5,8 @@ RUN apk update && \
     apk add git && \
     apk add go && \
     apk add make && \
+    apk add make && \
+    apk add rsync && \
     git clone https://github.com/cli/cli.git gh-cli && \
     cd gh-cli && \
     make && \
