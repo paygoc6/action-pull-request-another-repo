@@ -35,6 +35,7 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
+HOME_DIR=$PWD
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -45,23 +46,21 @@ git config --global user.name "$INPUT_USER_NAME"
 echo "Cloning destination git repository"
 git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-echo "Creating folder & copying files"
+echo "Creating folder"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-rsync -a --delete "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-
 cd "$CLONE_DIR"
 
 echo "Checking if branch already exists"
 git fetch -a
 if git show-ref "$INPUT_DESTINATION_HEAD_BRANCH"; 
 then
-    git stash
     git checkout "$INPUT_DESTINATION_HEAD_BRANCH"
-    git stash apply
 else 
     git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 fi
 
+echo "Copying files"
+rsync -a --delete "$HOME_DIR/$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 git add .
 
 if git status | grep -q "Changes to be committed"
