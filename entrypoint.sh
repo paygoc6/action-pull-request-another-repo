@@ -61,7 +61,7 @@ echo "Checking if branch already exists"
 git fetch -a
 if git show-ref "$INPUT_DESTINATION_HEAD_BRANCH"; 
 then
-    git checkout "$INPUT_DESTINATINO_HEAD_BRANCH"
+    git checkout "$INPUT_DESTINATION_HEAD_BRANCH"
 else 
     git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 fi
