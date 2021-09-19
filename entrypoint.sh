@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 set -x
 
@@ -9,20 +8,20 @@ then
   return -1
 fi
 
-if [ -z $INPUT_PR_TITLE]
+if [ -z $INPUT_PR_TITLE ]
 then
     echo "pr_title must be defined"
     return -1
 fi
 
 
-if [ -z $INPUT_COMMIT_MSG]
+if [ -z $INPUT_COMMIT_MSG ]
 then
     echo "commit_msg must be defined"
     return -1
 fi
 
-if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master"]
+if [ $INPUT_DESTINATION_HEAD_BRANCH == "main" ] || [ $INPUT_DESTINATION_HEAD_BRANCH == "master" ]
 then
   echo "Destination head branch cannot be 'main' nor 'master'"
   return -1
@@ -67,14 +66,23 @@ if git status | grep -q "Changes to be committed"
 then
   git commit --message "$INPUT_COMMIT_MSG"
 
-  echo "Pushing git commit"
-  git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
-  echo "Creating a pull request"
-  gh pr create -t "$INPUT_PR_TITLE" \
-               -b "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" \
-               -B $INPUT_DESTINATION_BASE_BRANCH \
-               -H $INPUT_DESTINATION_HEAD_BRANCH \
-                  $PULL_REQUEST_REVIEWERS
+
+  if git show-ref "$INPUT_DESTINATION_HEAD_BRANCH"; 
+  then
+    echo "Pushing git commit"
+    git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+  else
+    echo "Pushing git commit"
+    git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+
+    echo "Creating a pull request"
+    gh pr create -t "$INPUT_PR_TITLE" \
+                 -b "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA" \
+                 -B $INPUT_DESTINATION_BASE_BRANCH \
+                 -H $INPUT_DESTINATION_HEAD_BRANCH \
+                    $PULL_REQUEST_REVIEWERS
+  fi
+
 else
   echo "No changes detected"
 fi
