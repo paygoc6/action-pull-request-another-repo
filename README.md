@@ -23,12 +23,12 @@ This GitHub Action copies a folder from the current repository to a location in 
             destination_folder: 'folder-name'
             destination_base_branch: 'branch-name'
             destination_head_branch: 'branch-name'
-            user_email: 'user-name@paygo.com.br'
-            user_name: 'user-name'
+            user_email: ${{ github.actor }} <${{ github.actor }}@users.noreply.githib.com>
+            user_name: ${{ github.actor }}
             pull_request_reviewers: 'reviewers'
 
 ## Variables
-* source_folder: The folder to be moved. Uses the same syntax as the `cp` command. Incude the path for any files not in the repositories root directory.
+* source_folder: The folder to be moved. Uses the same syntax as the `cp` command. Incude the path for any files not in the repository's root directory.
 * destination_repo: The repository to place the file or directory in.
 * destination_folder: [optional] The folder in the destination repository to place the file in, if not the root directory.
 * user_email: The GitHub user email associated with the API token secret.
@@ -38,8 +38,7 @@ This GitHub Action copies a folder from the current repository to a location in 
 * pull_request_reviewers: [optional] The pull request reviewers. It can be only one (just like 'reviewer') or many (just like 'reviewer1,reviewer2,...')
 
 ## ENV
-* API_TOKEN_GITHUB: You must create a personal access token in you account. Follow the link:
-- [Personal access token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token)
+* API_TOKEN_GITHUB: You must create a [personal access token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) in your account and add it to the [source repository](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-codespaces) **Repository secrets**, not **Environment Secrets**.
 
 > You must select the scopes: 'repo = Full control of private repositories', 'admin:org = read:org' and 'write:discussion = Read:discussion'; 
 
