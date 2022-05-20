@@ -26,6 +26,10 @@ inputs:
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  allow_force_push:
+    description: 'Allow force push'
+    default: 'false'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

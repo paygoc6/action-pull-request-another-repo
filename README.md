@@ -26,6 +26,7 @@ This GitHub Action copies a folder from the current repository to a location in 
             user_email: 'user-name@paygo.com.br'
             user_name: 'user-name'
             pull_request_reviewers: 'reviewers'
+            allow_force_push: 'false'
 
 ## Variables
 * source_folder: The folder to be moved. Uses the same syntax as the `cp` command. Incude the path for any files not in the repositories root directory.
@@ -36,6 +37,7 @@ This GitHub Action copies a folder from the current repository to a location in 
 * destination_base_branch: [optional] The branch into which you want your code merged. Default is `main`.
 * destination_head_branch: The branch to create to push the changes. Cannot be `master` or `main`.
 * pull_request_reviewers: [optional] The pull request reviewers. It can be only one (just like 'reviewer') or many (just like 'reviewer1,reviewer2,...')
+* allow_force_push: [optional] Allow force push. Push with `--force` flag.
 
 ## ENV
 * API_TOKEN_GITHUB: You must create a personal access token in you account. Follow the link:
