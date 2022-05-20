@@ -56,7 +56,8 @@ then
                -b $INPUT_DESTINATION_HEAD_BRANCH \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
-                  $PULL_REQUEST_REVIEWERS
+                  $PULL_REQUEST_REVIEWERS || true
+  return 0
 else
   echo "No changes detected"
 fi
