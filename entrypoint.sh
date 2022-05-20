@@ -48,6 +48,7 @@ then
   then
     git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   else
+    echo "Force push enabled"
     git push -uf origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   fi
   echo "Creating a pull request"
