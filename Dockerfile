@@ -1,6 +1,7 @@
 FROM golang:1.16-alpine3.13
 
 RUN apk update && \
+    apk add --no-cache bash && \
     apk upgrade && \
     apk add build-base && \
     apk add git && \

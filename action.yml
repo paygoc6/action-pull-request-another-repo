@@ -1,13 +1,13 @@
 name: 'Pull Request another repository'
 description: 'Used for pull request a copy of a folder to another repository'
 inputs:
-  source_folder:
+  source_folders:
     description: 'Source folder from origin'
     required: true
   destination_repo:
     description: 'Destination repository'
     required: true
-  destination_folder:
+  destination_folders:
     description: 'Destination folder to push the origin folder'
     required: false
   user_email:
@@ -30,9 +30,9 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.source-folder }}
+    - ${{ inputs.source-folders }}
     - ${{ inputs.destination-repo }}
-    - ${{ inputs.destination-folder }}
+    - ${{ inputs.destination-folders }}
     - ${{ inputs.user-email }}
     - ${{ inputs.user-name }}
     - ${{ inputs.destination-head-branch }}
