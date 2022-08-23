@@ -34,7 +34,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+cp -R "$INPUT_SOURCE_FOLDER/." "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
@@ -44,13 +44,26 @@ if git status | grep -q "Changes to be committed"
 then
   git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
   echo "Pushing git commit"
-  git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
-  echo "Creating a pull request"
-  gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
-               -b $INPUT_DESTINATION_HEAD_BRANCH \
-               -B $INPUT_DESTINATION_BASE_BRANCH \
-               -H $INPUT_DESTINATION_HEAD_BRANCH \
-                  $PULL_REQUEST_REVIEWERS
+  if [ $INPUT_ALLOW_FORCE_PUSH == "false" ]
+  then
+    git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+    echo "Creating a pull request"
+    gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
+                 -b $INPUT_DESTINATION_HEAD_BRANCH \
+                 -B $INPUT_DESTINATION_BASE_BRANCH \
+                 -H $INPUT_DESTINATION_HEAD_BRANCH \
+                    $PULL_REQUEST_REVIEWERS
+  else
+    echo "Force push enabled"
+    git push -uf origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+    echo "Creating a pull request"
+    gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
+                 -b $INPUT_DESTINATION_HEAD_BRANCH \
+                 -B $INPUT_DESTINATION_BASE_BRANCH \
+                 -H $INPUT_DESTINATION_HEAD_BRANCH \
+                    $PULL_REQUEST_REVIEWERS || true
+    return 0
+  fi
 else
   echo "No changes detected"
 fi
