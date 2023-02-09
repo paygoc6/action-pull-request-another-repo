@@ -28,6 +28,7 @@ This GitHub Action copies a folder from the current repository to a location in 
             pull_request_reviewers: 'reviewers'
             pull_request_title: '[JIRA-X] New PR'
             pull_request_body: 'AutoPR Generated.'
+            allow_force_push: 'false'
 
 ## Variables
 * source_folder: The folder to be moved. Uses the same syntax as the `cp` command. Incude the path for any files not in the repositories root directory.
@@ -40,6 +41,7 @@ This GitHub Action copies a folder from the current repository to a location in 
 * pull_request_reviewers: [optional] The pull request reviewers. It can be only one (just like 'reviewer') or many (just like 'reviewer1,reviewer2,...')
 * pull_request_title: [optional] Title of your PR
 * pull_request_body: [optional] Body of your PR
+* allow_force_push: [optional] Allow force push. Push with `--force` flag.
 
 ## ENV
 * API_TOKEN_GITHUB: You must create a personal access token in you account. Follow the link:

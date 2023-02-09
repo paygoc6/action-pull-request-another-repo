@@ -31,6 +31,10 @@ inputs:
     required: false
   pull_request_body:
     description: 'Pull request body'
+    required: false
+  allow_force_push:
+    description: 'Allow force push'
+    default: 'false'
     required: false    
 runs:
   using: 'docker'

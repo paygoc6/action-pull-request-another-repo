@@ -63,11 +63,22 @@ then
   echo "Creating a pull request"
   echo $PR_BODY > pr_body
   
-  gh pr create -t "$PR_TITLE" \
-               -F pr_body \
-               -B $INPUT_DESTINATION_BASE_BRANCH \
-               -H $INPUT_DESTINATION_HEAD_BRANCH \
-                  $PULL_REQUEST_REVIEWERS
+  if [ $INPUT_ALLOW_FORCE_PUSH == "false" ]
+    gh pr create -t "$PR_TITLE" \
+                -F pr_body \
+                -B $INPUT_DESTINATION_BASE_BRANCH \
+                -H $INPUT_DESTINATION_HEAD_BRANCH \
+                    $PULL_REQUEST_REVIEWERS
+  else
+    echo "Force push enabled"
+    git push -uf origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+    gh pr create -t "$PR_TITLE" \
+                -F pr_body \
+                -B $INPUT_DESTINATION_BASE_BRANCH \
+                -H $INPUT_DESTINATION_HEAD_BRANCH \
+                    $PULL_REQUEST_REVIEWERS || true
+    return 0
+  fi                  
 else
   echo "No changes detected"
 fi
