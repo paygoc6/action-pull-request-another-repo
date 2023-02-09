@@ -63,7 +63,7 @@ then
   echo "Creating a pull request"
   echo $PR_BODY > pr_body
   
-  gh pr create -t $PR_TITLE \
+  gh pr create -t "$PR_TITLE" \
                -F pr_body \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
