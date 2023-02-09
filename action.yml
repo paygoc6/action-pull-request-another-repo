@@ -26,6 +26,12 @@ inputs:
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  pull_request_title:
+    description: 'Pull request title'
+    required: false
+  pull_request_body:
+    description: 'Pull request body'
+    required: false    
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -38,6 +44,9 @@ runs:
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.pull-request-body }}
+    - ${{ inputs.pull-request-title }}
+
 branding:
   icon: 'git-commit'
   color: 'green'
