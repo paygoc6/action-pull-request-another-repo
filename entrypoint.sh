@@ -22,6 +22,17 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
+
+if [ -z "$PR_TITLE" ]
+then
+  PR_TITLE=$INPUT_DESTINATION_HEAD_BRANCH
+fi
+
+if [ -z "$PR_BODY" ]
+then
+  PR_BODY=$INPUT_DESTINATION_HEAD_BRANCH
+fi
+
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -46,8 +57,8 @@ then
   echo "Pushing git commit"
   git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   echo "Creating a pull request"
-  gh pr create -t $INPUT_DESTINATION_HEAD_BRANCH \
-               -b $INPUT_DESTINATION_HEAD_BRANCH \
+  gh pr create -t $PR_TITLE \
+               -b $PR_BODY \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
                   $PULL_REQUEST_REVIEWERS
