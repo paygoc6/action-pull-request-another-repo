@@ -3,6 +3,17 @@
 set -e
 set -x
 
+function str_bool {
+  local str="${1:-false}"
+  local pat='^(true|1|yes)$'
+  if [[ "$str" =~ $pat ]]
+  then
+    echo 'true'
+  else
+    echo 'false'
+  fi
+}
+
 if [ -z "$INPUT_SOURCE_FOLDER" ]
 then
   echo "Source folder must be defined"
@@ -20,6 +31,15 @@ then
   PULL_REQUEST_REVIEWERS=$INPUT_PULL_REQUEST_REVIEWERS
 else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
+fi
+
+if [[ `str_bool "$CREATE_AS_DRAFT"` == 'true' ]]
+then
+  echo "CREATE_AS_DRAFT='$CREATE_AS_DRAFT' was evaluated as true, creating as draft pr"
+  CREATE_AS_DRAFT=' -d '
+else
+  echo "CREATE_AS_DRAFT='$CREATE_AS_DRAFT' was evaluated as false"
+  CREATE_AS_DRAFT=''
 fi
 
 CLONE_DIR=$(mktemp -d)
@@ -50,7 +70,8 @@ then
                -b $INPUT_DESTINATION_HEAD_BRANCH \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
-                  $PULL_REQUEST_REVIEWERS
+                  $PULL_REQUEST_REVIEWERS \
+                  $CREATE_AS_DRAFT
 else
   echo "No changes detected"
 fi

@@ -26,6 +26,10 @@ inputs:
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  create_as_draft:
+    description: 'Create pull request as draft'
+    required: false
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -38,6 +42,7 @@ runs:
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.create-as-draft }}
 branding:
   icon: 'git-commit'
   color: 'green'
