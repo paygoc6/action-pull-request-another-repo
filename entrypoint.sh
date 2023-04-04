@@ -33,12 +33,12 @@ else
   PULL_REQUEST_REVIEWERS='-r '$INPUT_PULL_REQUEST_REVIEWERS
 fi
 
-if [[ `str_bool "$CREATE_AS_DRAFT"` == 'true' ]]
+if [[ `str_bool "$INPUT_CREATE_AS_DRAFT"` == 'true' ]]
 then
-  echo "CREATE_AS_DRAFT='$CREATE_AS_DRAFT' was evaluated as true, creating as draft pr"
+  echo "CREATE_AS_DRAFT='$INPUT_CREATE_AS_DRAFT' was evaluated as true, creating as draft pr"
   CREATE_AS_DRAFT=' -d '
 else
-  echo "CREATE_AS_DRAFT='$CREATE_AS_DRAFT' was evaluated as false"
+  echo "CREATE_AS_DRAFT='$INPUT_CREATE_AS_DRAFT' was evaluated as false"
   CREATE_AS_DRAFT=''
 fi
 
