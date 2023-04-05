@@ -1,0 +1,11 @@
+name: Pull Request Workflow
+on: pull_request
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets-scanner:
+    uses: hpe-actions/secrets-scanner/.github/workflows/secrets-scanner.yml@v2
+    with:
+      config_override: ".gitleaks.toml"
