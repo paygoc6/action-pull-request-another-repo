@@ -35,7 +35,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 echo "syncing ${$INPUT_DESTINATION_REPO} with Resy UI Blueprint "
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 rsync \
-  $INPUT_SOURCE_FOLDER \
+  "$INPUT_SOURCE_FOLDER" \
   "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
