@@ -32,9 +32,11 @@ git config --global user.name "$INPUT_USER_NAME"
 echo "Cloning destination git repository"
 git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
-echo "Copying contents to git repo"
+echo "syncing ${$INPUT_DESTINATION_REPO} with Resy UI Blueprint "
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
-cp $INPUT_SOURCE_FOLDER "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+rsync \
+  $INPUT_SOURCE_FOLDER \
+  "$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 cd "$CLONE_DIR"
 git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
