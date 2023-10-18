@@ -2,7 +2,7 @@
 
 This GitHub Action copies a folder from the current repository to a location in another repository and create a pull request
 
-## Example Workflow
+## Example Workflow 
 
 ```yaml
     name: Push File
